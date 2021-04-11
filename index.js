@@ -6,11 +6,9 @@ const swap = function(item, left, right){
   
   const partition = function(item, left, right){
     const pivot = item[Math.floor((left + right)/2)];
-    console.log('i: ', left)
-    console.log('j: ', right - 1 )
     let i = left;
-    let j = right - 1;
-    while(i < j){
+    let j = right;
+    while(i <= j){
       while(item[i] < pivot){
         i++
       };
@@ -19,25 +17,28 @@ const swap = function(item, left, right){
         j--
       };
   
-      if(i < j){
+      if(i <= j){
         swap(item, i, j);
+        i++
+        j--
       };
     };
     return i;
   };
   
-  const arrays = [5,3,7,6,2,9]
-  // [46,77,51,78,47,70,98,0,30,58,96,97,8,71,1];
+  const arrays = [93, 75, 94, 54, 61, 27, 18, 34, 23, 36, 6, 14, 81, 90, 65, 73, 10, 28, 68, 0, 40, 65, 37, 18, 61] 
   
   const quickSort = function(item, left, right){
-    const key = partition(item, left, right);
-    console.log(item);
-    if(key > left){
-      quickSort(item,left, key);
+    if(item.length > 1){
+      const key = partition(item, left, right);
+      console.log(item);
+      if(key - 1 > left){
+        quickSort(item, left, key - 1);
+      }
+      if(key< right){
+        quickSort(item, key ,right)
+      };
+      return item
     }
-    if(key + 1 < right){
-      quickSort(item, key + 1 ,right)
-    };
-    return item
   };
-  console.log(quickSort(arrays,0,arrays.length));
+  console.log(quickSort(arrays,0,arrays.length - 1));
